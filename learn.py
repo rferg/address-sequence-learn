@@ -9,13 +9,13 @@ import pickle
 
 
 def main():
-    df = pd.read_csv('addr_data.csv', header=0, encoding='utf-8', dtype=str)
+    df = pd.read_csv('full_data.csv', header=0, encoding='utf-8', dtype=str)
     df_train, df_test = train_test_split(df, test_size=0.2)
-    h.df_to_txt(df_train, 'training_data.txt')
-    h.df_to_txt(df_test, 'training_data.txt')
-    X_train, y_train, lengths_train = h.load_conll('training_data.txt', 
+    h.df_to_txt(df_train, 'full_training_data.txt')
+    h.df_to_txt(df_test, 'full_testing_data.txt')
+    X_train, y_train, lengths_train = h.load_conll('full_training_data.txt', 
                                                    h.features)
-    X_test, y_test, lengths_test = h.load_conll('testing_data.txt', h.features)
+    X_test, y_test, lengths_test = h.load_conll('full_testing_data.txt', h.features)
     clf = StructuredPerceptron(decode='viterbi', lr_exponent=0.1, verbose=True, 
                                max_iter=25)
     clf.fit(X_train, y_train, lengths_train)
